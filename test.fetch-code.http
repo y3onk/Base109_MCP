@@ -6,5 +6,16 @@ Content-Type: application/json
   "owner": "hvvup",
   "repo": "codeSec",
   "branch": "jwt",
+  "folder": "database/jwt/fixed/ds_fixed_9.js" 
+}
+
+### GitHub 폴더 내 파일 한번에 가져오기
+POST http://localhost:3000/fetch-code
+Content-Type: application/json
+
+{
+  "owner": "hvvup",
+  "repo": "codeSec",
+  "branch": "jwt",
   "folder": "database/jwt/fixed"
 }
