@@ -1,17 +1,22 @@
 const express = require("express");
 const { spawn } = require("child_process");
+const path = require("path");
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 const app = express();
 
 app.use(express.json());
 
 app.post("/fetch-code", (req, res) => {
-  const { owner, repo } = req.body;
+  const { owner, repo, branch, folder } = req.body;
 
-  const pythonProcess = spawn("python3", [
-    "./mcp/github_code_fetcher.py",
-    owner,
-    repo,
-  ]);
+  // 절대 경로로 Python 스크립트 지정
+ const scriptPath = path.resolve(__dirname, "../mcp/get_github_file.py");
+
+  // 환경변수 포함해서 실행 (GITHUB_TOKEN 전달 필요)
+  const env = { ...process.env, PYTHONIOENCODING: 'utf-8' };
+  const pythonProcess = spawn("python", [scriptPath, owner, repo, branch, folder], { env });
+
+
 
   let dataBuffer = "";
 
@@ -20,7 +25,7 @@ app.post("/fetch-code", (req, res) => {
   });
 
   pythonProcess.stderr.on("data", (data) => {
-    console.error(`stderr: ${data}`);
+    console.error(`stderr: ${data.toString()}`);
   });
 
   pythonProcess.on("close", (code) => {

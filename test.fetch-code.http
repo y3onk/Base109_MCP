@@ -3,6 +3,8 @@ POST http://localhost:3000/fetch-code
 Content-Type: application/json
 
 {
-  "owner": "juice-shop",
-  "repo": "juice-shop"
+  "owner": "hvvup",
+  "repo": "codeSec",
+  "branch": "jwt",
+  "folder": "database/jwt/fixed"
 }
