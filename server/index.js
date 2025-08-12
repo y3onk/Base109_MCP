@@ -9,9 +9,7 @@ app.use(express.json());
 app.post("/fetch-code", (req, res) => {
   const { owner, repo, branch, folder, filePath } = req.body;
 
-  // 절대 경로로 Python 스크립트 지정
   const scriptPath = path.resolve(__dirname, "../mcp/get_github_file.py");
-  // 환경변수 포함해서 실행 (GITHUB_TOKEN 전달 필요)
   const env = { ...process.env, PYTHONIOENCODING: 'utf-8' };
 
   const args = [scriptPath, owner, repo, branch];
@@ -19,18 +17,42 @@ app.post("/fetch-code", (req, res) => {
   if (filePath) {
     args.push(filePath);
   } else if (folder) {
-    args.push(folder, "--folder"); //폴더 내 여러파일 요청
+    args.push(folder, "--folder");
   } else {
     return res.status(400).json({ error: "filePath 또는 folder 중 하나는 필수입니다." });
   }
 
-  res.setHeader("Content-Type", "application/x-ndjson; charset=utf-8");
+  res.setHeader("Content-Type", "application/json; charset=utf-8");
+  // 배열형 JSON으로 묶어서 보낼 경우 아래처럼
+  // res.write('[');
 
   const pythonProcess = spawn("python", args, { env });
 
+  let buffer = "";
+
   pythonProcess.stdout.on("data", (data) => {
-    // 폴더 요청 시 여러 JSON 객체가 한 줄씩 출력됨 -> 그대로 클라이언트에 스트리밍
-    res.write(data);
+    buffer += data.toString();
+
+    // 라인 단위로 자르기
+    let lines = buffer.split("\n");
+    // 마지막 라인은 아직 완전하지 않을 수 있으니 남겨두기
+    buffer = lines.pop();
+
+    for (const line of lines) {
+      if (line.trim().length === 0) continue;
+      try {
+        const jsonObj = JSON.parse(line);
+        // jsonObj 가공 가능
+        // 예) console.log(jsonObj);
+
+        // 클라이언트에 보내기
+        // 만약 배열로 묶지 않고 스트리밍으로 하나씩 JSON 보내려면 개별 JSON.stringify 후 전송
+        res.write(JSON.stringify(jsonObj) + "\n");
+      } catch (e) {
+        console.error("JSON parse error:", e);
+        console.error("Line:", line);
+      }
+    }
   });
 
   pythonProcess.stderr.on("data", (data) => {
@@ -38,16 +60,24 @@ app.post("/fetch-code", (req, res) => {
   });
 
   pythonProcess.on("close", (code) => {
+    if (buffer.trim().length > 0) {
+      try {
+        const jsonObj = JSON.parse(buffer);
+        res.write(JSON.stringify(jsonObj) + "\n");
+      } catch (e) {
+        console.error("Final JSON parse error:", e);
+      }
+    }
+
     if (code !== 0) {
       if (!res.headersSent) {
         res.status(500).json({ error: "Python MCP 실패" });
       } else {
-        // 이미 일부 데이터가 전송되었으면 그냥 연결 종료
         res.end();
       }
       return;
     }
-    res.end(); // 모든 데이터 전송 후 연결 종료
+    res.end();
   });
 });
 
