@@ -1,4 +1,10 @@
+# MCP Server Requirements
+mcp>=1.0.0
 requests>=2.31.0
 python-dotenv>=1.0.1
 openai>=1.35.0
+
+# Additional dependencies for MCP
+asyncio-mqtt>=0.16.1
+pydantic>=2.0.0
 
