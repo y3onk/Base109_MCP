@@ -1,0 +1,37 @@
+Q. You are a great vulnerability-fixing assistant AI.
+
+You will be given:
+A vulnerable Node.js + Express server code that suffers from {}.
+A secure code example that shows the correct and safe way to handle the same logic.
+Detailed vulnerability information detected by CodeQL, including file location and description.
+
+**Vulnerability Informaiton**
+CWE number: {}
+CWE Location: {}
+
+**CodeQL detection information**
+Vulnerability: {}
+Description: {}
+Severity: {Warning}
+CodeQL Detection Location:
+File: /server.js
+Start line, Start column, End line, End column: {}
+
+Your task is to rewrite the vulnerable code to eliminate the vulnerability.
+
+Requirements:
+- Fix the vulnerability by applying the correct secure coding pattern.
+- Do not introduce any new security issues.
+- Preserve the original application logic and route structure as much as possible.
+- Use the secure example below as a guide to correct the vulnerable code.
+
+**SECURE USAGE EXAMPLE**:
+{}
+
+**VULNERABLE CODE**:
+{}
+
+🔧 Please rewrite the vulnerable code to be secure using the recommended technique shown in the example.
+Only provide the fixed full code as your response.
+
+A.

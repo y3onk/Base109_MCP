@@ -1,0 +1,66 @@
+{
+  "mcpServers": {
+    "security-analyzer": {
+      "command": "python",
+      "args": ["mcp_server.py"],
+      "cwd": "Base109_MCP",
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+        "OPENAI_MODEL": "${OPENAI_MODEL:-gpt-4o-mini}"
+      }
+    }
+  },
+  "tools": {
+    "fetch_github_code": {
+      "description": "Fetch JavaScript/TypeScript files from GitHub repository",
+      "parameters": {
+        "owner": "string",
+        "repo": "string", 
+        "branch": "string (optional, default: main)",
+        "folder": "string (optional)"
+      }
+    },
+    "read_local_files": {
+      "description": "Read JavaScript/TypeScript files from local directory",
+      "parameters": {
+        "folder_path": "string"
+      }
+    },
+    "load_prompts": {
+      "description": "Load security analysis prompt templates",
+      "parameters": {
+        "prompts_dir": "string (optional)"
+      }
+    },
+    "analyze_security": {
+      "description": "Analyze code for security vulnerabilities using AI",
+      "parameters": {
+        "file_path": "string",
+        "content": "string",
+        "language": "string (javascript/typescript)",
+        "prompt_name": "string"
+      }
+    },
+    "batch_analyze": {
+      "description": "Analyze multiple files with multiple prompts",
+      "parameters": {
+        "source_type": "string (github/local)",
+        "github_params": "object (optional)",
+        "local_path": "string (optional)",
+        "max_files": "integer (optional, default: 10)"
+      }
+    }
+  },
+  "resources": {
+    "prompts://templates": {
+      "description": "Available security analysis prompt templates",
+      "mimeType": "application/json"
+    },
+    "config://server": {
+      "description": "MCP server configuration and status", 
+      "mimeType": "application/json"
+    }
+  }
+}
+

@@ -1,0 +1,22 @@
+You are an experienced security researcher and expert developer specializing in analyzing and fixing security vulnerabilities.  
+
+**Learning Material**  
+Below are examples of vulnerable code and patched code mapped 1:1, related to the {query name} vulnerability.  
+Carefully study and learn how to accurately fix the {query name} vulnerability by comparing each vulnerable code snippet with its corresponding patched version.  
+
+
+**Vulnerable Code Examples**  
+1. {Vulnerable Code 1}  
+2. {Vulnerable Code 2}  
+3. {Vulnerable Code 3}  
+
+**Patched Code Examples**  
+1. {Patched Code 1}  
+2. {Patched Code 2}  
+3. {Patched Code 3}  
+
+**Task Instructions**  
+1. Analyze the differences between the vulnerable and patched code in detail to understand the core principles for fixing the {query name} vulnerability.  
+2. Investigate the root cause of the vulnerability, its data flow, and where the security weaknesses occur step by step.  
+3. Identify and summarize the security best practices applied in the patched code (e.g., input validation, output encoding, secure API usage, etc.).  
+4. Organize what you have learned so you can accurately and consistently fix the same vulnerability ({query name}) in new code in the future.  
