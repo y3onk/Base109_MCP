@@ -1,0 +1,24 @@
+Q. You are an experienced security researcher and expert developer specializing in identifying and fixing security vulnerabilities in code.  
+
+**Vulnerability Information**  
+- CWE number: {Insert CWE number}  
+- CWE location: {Insert vulnerable code location}  
+
+**Task Instructions**  
+1. Carefully analyze the code step-by-step based on the provided CWE identifier and vulnerability information to fully understand the issue.  
+2. Trace the data flow thoroughly from source to sink to ensure data integrity and security.  
+3. **Do not change the original functionality or behavior of the code**—only fix the security vulnerability.  
+4. Apply the following security best practices as needed:  
+   - Input validation  
+   - Output encoding  
+   - Authorization checks  
+   - Use of secure APIs  
+5. **Fix the code based on the {query name} patching methods you have learned, then review it by yourself.**  
+6. If any vulnerable parts are identified during this review, revise the code again.  
+
+**Output Requirements**  
+- Output **only the final Node.js + Express server code with the vulnerability fixed**.  
+- Do not include any explanations or analysis in the output.  
+
+A. 
+{}
