@@ -1,6 +1,6 @@
 # 🔒 MCP Security Analysis Server
 
-GitHub에서 JavaScript/TypeScript 파일을 가져와서 AI를 통해 보안 취약점을 분석하고 수정하는 MCP(Model Context Protocol) 서버입니다.
+GitHub에서 JavaScript/TypeScript 파일을 가져와서 LLM에 프롬프트와 함께 전달하고 코드 취약점 분석과 수정을 진행하는 MCP(Model Context Protocol) 서버입니다.
 
 ## 🚀 주요 기능
 
