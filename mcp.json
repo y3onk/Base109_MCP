@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/spec/main/schemas/mcp.json",
+  "mcpServers": {
+    "get1file": {
+      "command": "python",
+      "args": ["./get1file.py"],
+      "cwd": ".",
+      "env": {
+        "OPENAI_API_KEY": "${env:OPENAI_API_KEY}",
+        "GITHUB_TOKEN": "${env:GITHUB_TOKEN}"
+      }
+    },
+    "security-analyzer": {
+      "command": "python",
+      "args": ["./mcp_server.py"],
+      "cwd": ".",
+      "env": {
+        "OPENAI_API_KEY": "${env:OPENAI_API_KEY}",
+        "GITHUB_TOKEN": "${env:GITHUB_TOKEN}",
+        "OPENAI_MODEL": "${env:OPENAI_MODEL}"
+      }
+    }
+  }
+}

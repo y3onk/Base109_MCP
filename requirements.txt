@@ -5,6 +5,9 @@ python-dotenv>=1.0.1
 openai>=1.35.0
 
 # Additional dependencies for MCP
-asyncio-mqtt>=0.16.1
 pydantic>=2.0.0
+
+# Development dependencies (optional)
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
 
